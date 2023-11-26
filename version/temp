@@ -1,0 +1,74 @@
+from flask import Flask, request, jsonify, render_template
+import openai
+from flask_cors import CORS
+import os
+import re
+
+app = Flask(__name__, static_folder='.', static_url_path='')
+
+# Enable CORS
+CORS(app)
+
+# Configure OpenAI API Key
+openai.api_key = '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'
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    messages = request.json.get('message', [])  # Retrieve the message history
+
+    # Check if messages list is empty
+    if not messages:
+        return jsonify({"error": "No messages provided"})
+    
+    incoming_message = messages[-1]['content']
+    print(messages)
+    # Construct the directive for a brief explanation and suggestions
+    directive_message = (f"please give shourt answer.You are a professional teacher for children who can explain everything to them in a simple way. "
+         f"First, provide a brief, short, concise, and engaging explanation for children about {incoming_message}. "
+         f"Include simple details and a fun analogy. ")
+
+    
+    messages.append({"role": "user", "content": directive_message})
+
+    # Fetch response from ChatGPT using OpenAI API
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            max_tokens=150
+        )
+        
+        full_response = response.choices[0].message['content'].strip()
+        #print(full_response)
+        with open("debug_response.txt", "w") as file:
+            file.write(full_response)
+
+
+
+        # Split the response into main content and suggestions
+        if "END" in full_response:
+            beginning_text, end_text = full_response.split("END", 1)
+            main_response = beginning_text.strip()
+            suggestions = [s.strip('?').strip() for s in re.findall(r'^\d+\.\s*(.+)$', end_text, re.MULTILINE)]
+            print(suggestions)
+        else:
+            # Handle the case where "END" is not present in the response
+            main_response = full_response
+            suggestions = []  # default to no suggestions
+
+
+
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+    # For now, let's return dummy suggestions; you can make this dynamic later
+    #suggestions = ["Tell me a story", "What is the sun?", "Who invented the computer?"]
+
+    return jsonify({"response": main_response, "suggestions": suggestions})
+
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=5001)

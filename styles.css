@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+body {
+    font-family: '-apple-system', 'BlinkMacSystemFont', 'Roboto', sans-serif;
+    background: linear-gradient(120deg, #F2F3F5, #E1E6F0);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+}
+
+.chat-container {
+    width: 75vw;
+    height: 90vh;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E5E8EC;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chat-window {
+    flex-grow: 1;     /* Allow the chat window to grow, taking up the available space */
+    overflow-y: auto;
+    border: 1px solid #E1E3E6;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+    height: 75%;
+    font-size: 1.1rem;
+}
+
+button {
+    padding: 10px 25px;
+    border: none;
+    background: linear-gradient(120deg, #EFEFF1, #D1D3D6);
+    border-radius: 20px;
+    color: #333;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"] {
+    background: #F7F8FA;
+    border: none;
+    border-radius: 20px;
+    color: #333;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    flex: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-input-container {
+    display: flex;
+    justify-content: space-between; /* Distribute space equally between elements */
+    align-items: center; 
+    gap: 10px;
+    position: relative; /* To position the send button */
+    margin-top: 10px; /* Provide some spacing from the suggestion buttons */
+}
+
+input[type="text"] {
+    background: #FFFFFF;
+    border: 2px solid #D1D3D6;
+    border-radius: 25px; 
+    padding: 10px 40px 10px 20px; /* More padding on the right for the send button */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05); /* Slight shadow for a raised appearance */
+    transition: all 0.3s ease;
+    flex: 1; /* Let it take the available width */
+    position: relative; /* To overlap the send button slightly */
+    z-index: 1; /* To keep it above the send button */
+}
+
+button.send {
+    position: absolute;
+    right: 10px;
+    background: linear-gradient(120deg, #EFEFF1, #D1D3D6);
+    border: none;
+    border-radius: 50%; /* Circular button */
+    width: 40px; /* Fixed width and height */
+    height: 40px;
+    color: #333;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    transition: all 0.3s ease;
+    z-index: 0; /* Below the input box */
+}
+
+button.send:hover {
+    background: linear-gradient(120deg, #D1D3D6, #EFEFF1);
+    transform: translateY(-2px);
+}
+
+/* ... (other styles) ... */
+
+.suggestion-buttons {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;  /* Allow buttons to wrap to the next line if there's not enough space */
+}
+
+.suggestion-buttons button {
+    font-family: 'Baloo', sans-serif;
+    background-color: #f0f0f0; /* Slightly off-white for sophistication */
+    color: #333; /* Dark text for contrast */
+    padding: 10px 20px;
+    border: 1px solid #aaa; /* Subtle border */
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+    text-align: center; /* Center the text */
+    flex: 1 1 auto;  /* Allows the button to grow and shrink according to content */
+    max-width: 33%;  /* Limit the width of each button to one-third of the container's width */
+    overflow: hidden;  /* Hide overflow content */
+    white-space: nowrap;  /* Prevent wrapping of text */
+    text-overflow: ellipsis;  /* Add ellipses when the text is too long */
+    cursor: pointer;
+    font-size: 0.9rem; /* Slightly smaller font for better content fit */
+    margin: 5px 0; /* Add a bit of margin to prevent buttons from touching each other */
+    line-height: 1.5; /* Set line height to control the number of lines shown */
+    margin: 5px; /* Give some space around each button */
+    flex-basis: calc(33% - 10px); /* Take up roughly a third of the container minus margins */
+    max-height: 3rem; /* Set maximum height to limit the button to two lines of text */
+    height: 60px;  /* fixed height */
+    overflow: hidden;  /* hide overflow content */
+    position: relative;  /* relative positioning inside the parent */
+    z-index: 0;  /* default stack order */
+    transition: transform 0.3s, z-index 0s;  /* smooth transform effect, immediate z-index change */
+}
+
+.suggestion-buttons button:hover {
+    background-color: #e0e0e0; /* Slightly darker on hover */
+    transform: translateY(-2px); /* Small lift on hover */
+    z-index: 1;  /* ensure hovered button is above the others */
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2); /* Slightly deeper shadow on hover */
+    max-height: none; /* Remove the height restriction */
+    white-space: normal; /* Allow text to wrap */
+    text-overflow: clip; /* Remove ellipses */
+    max-height: 100%; /* Allow the button to show all its content when hovered */
+    overflow: auto;   /* Show scroll if content is too long */
+    
+}
+
+
+.suggestion-buttons button:active {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+}
+
+
+.suggestion-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+#refreshButton {
+    display: none;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: 10px;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kid's Chat Landing Page</title>
+    <link rel="stylesheet" href="landingStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="form-container">
+        <h1>Welcome to Kid's Chat!</h1>
+        <form id="userPreferences" action="/" method="post">
+            <div class="input-container">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="input-container">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="" disabled selected>Select your gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="input-container">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" min="5" max="99" placeholder="Enter your age" required>
+            </div>
+
+            <div class="input-container">
+                <label for="interests">Interests</label>
+                <input type="text" id="interests" name="interests" placeholder="E.g. dinosaurs, space, music" required>
+            </div>
+
+            <div class="input-container">
+                <label for="currentTopic">Current Learning Topic</label>
+                <input type="text" id="currentTopic" name="currentTopic" placeholder="E.g. Solar System, Algebra" required>
+            </div>
+
+            <button type="submit">Start Chatting</button>
+        </form>
+    </div>
+
+    
+
+</body>
+
+</html>
